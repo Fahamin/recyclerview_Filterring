@@ -1,7 +1,6 @@
 package app.cave.recyclerview_filterring;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,7 +47,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> implements Filtera
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                Snackbar.make(v, players.get(pos).getName(), Snackbar.LENGTH_SHORT).show();
+
+                DialogBox dialog = new DialogBox();
+                dialog.showDialog(c, players.get(pos).getName(), players.get(pos).getPos());
+               // Snackbar.make(v, players.get(pos).getName(), Snackbar.LENGTH_SHORT).show();
             }
         });
 

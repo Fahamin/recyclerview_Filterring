@@ -1,33 +1,46 @@
 package app.cave.recyclerview_filterring;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
 
-   SearchView sv;
-
+    SearchView sv;
+    ArrayList<Player> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sv= findViewById(R.id.mSearch);
+        sv = findViewById(R.id.mSearch);
         RecyclerView recyclerView = findViewById(R.id.rechyerViewID);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        final MyAdapter adapter=new MyAdapter(this,getPlayers());
-        recyclerView.setAdapter(adapter);
+        arrayList = new ArrayList<>();
+        arrayList.add(new Player("HEsllkj","ffff", R.drawable.login));
+        arrayList.add(new Player("ff", "ff", R.drawable.login));
+        arrayList.add(new Player("ggg", "fffff", R.drawable.login));
+        arrayList.add(new Player("ttt", "bbb", R.drawable.login));
 
+
+       /* final MyAdapter adapter = new MyAdapter(this, arrayList);
+        recyclerView.setAdapter(adapter);*/
+
+       final RecycleAdapter adapter = new RecycleAdapter(this,arrayList,recyclerView,this);
+       recyclerView.setAdapter(adapter);
         //SEARCH
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -45,8 +58,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void nextActivity(View view) {
+        startActivity(new Intent(this,listacc.class));
+    }
+
+    @Override
+    public void onItemClick(View v, int pos) {
+
+        if(pos ==0)
+        {
+            Toast.makeText(this, "Number 1", Toast.LENGTH_SHORT).show();
+        }
+        if(pos ==1)
+        {
+            Toast.makeText(this, "Number 2", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     //ADD PLAYERS TO ARRAYLIST
-    private ArrayList<Player> getPlayers()
+  /*  private ArrayList<Player> getPlayers()
     {
         ArrayList<Player> players=new ArrayList<>();
         Player p=new Player();
@@ -86,6 +117,6 @@ public class MainActivity extends AppCompatActivity {
         players.add(p);
 
         return players;
-    }
+    }*/
 
 }

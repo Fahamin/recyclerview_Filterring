@@ -6,6 +6,12 @@ public class Player {
     String pos;
     int img;
 
+    public Player(String name, String pos, int img) {
+        this.name = name;
+        this.pos = pos;
+        this.img = img;
+    }
+
     public String getName() {
         return name;
     }
