@@ -4,47 +4,51 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
-public class CustomFilter extends Filter{
+public class CustomFilter extends Filter {
 
     MyAdapter adapter;
     ArrayList<Player> filterList;
 
-    public CustomFilter(ArrayList<Player> filterList,MyAdapter adapter)
-    {
-        this.adapter=adapter;
-        this.filterList=filterList;
+    RecycleAdapter recycleAdapter;
+
+    public CustomFilter(ArrayList<Player> filterList, MyAdapter adapter) {
+        this.adapter = adapter;
+        this.filterList = filterList;
+
+    }
+
+    public CustomFilter(ArrayList<Player> filterList, RecycleAdapter recycleAdapter) {
+
+        this.recycleAdapter = recycleAdapter;
+        this.filterList = filterList;
 
     }
 
     //FILTERING OCURS
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
-        FilterResults results=new FilterResults();
+        FilterResults results = new FilterResults();
 
         //CHECK CONSTRAINT VALIDITY
-        if(constraint != null && constraint.length() > 0)
-        {
+        if (constraint != null && constraint.length() > 0) {
             //CHANGE TO UPPER
-            constraint=constraint.toString().toUpperCase();
+            constraint = constraint.toString().toUpperCase();
             //STORE OUR FILTERED PLAYERS
-            ArrayList<Player> filteredPlayers=new ArrayList<>();
+            ArrayList<Player> filteredPlayers = new ArrayList<>();
 
-            for (int i=0;i<filterList.size();i++)
-            {
+            for (int i = 0; i < filterList.size(); i++) {
                 //CHECK
-                if(filterList.get(i).getName().toUpperCase().contains(constraint))
-                {
+                if (filterList.get(i).getName().toUpperCase().contains(constraint)) {
                     //ADD PLAYER TO FILTERED PLAYERS
                     filteredPlayers.add(filterList.get(i));
                 }
             }
 
-            results.count=filteredPlayers.size();
-            results.values=filteredPlayers;
-        }else
-        {
-            results.count=filterList.size();
-            results.values=filterList;
+            results.count = filteredPlayers.size();
+            results.values = filteredPlayers;
+        } else {
+            results.count = filterList.size();
+            results.values = filterList;
 
         }
 
@@ -54,9 +58,9 @@ public class CustomFilter extends Filter{
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
 
-        adapter.players= (ArrayList<Player>) results.values;
+        recycleAdapter.players = (ArrayList<Player>) results.values;
 
         //REFRESH
-        adapter.notifyDataSetChanged();
+        recycleAdapter.notifyDataSetChanged();
     }
 }
