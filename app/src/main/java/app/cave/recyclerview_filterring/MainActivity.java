@@ -1,11 +1,13 @@
 package app.cave.recyclerview_filterring;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -30,17 +32,19 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         arrayList = new ArrayList<>();
-        arrayList.add(new Player("HEsllkj","ffff", R.drawable.login));
-        arrayList.add(new Player("ff", "ff", R.drawable.login));
-        arrayList.add(new Player("ggg", "fffff", R.drawable.login));
-        arrayList.add(new Player("ttt", "bbb", R.drawable.login));
+        arrayList.add(new Player("HEslldddddddddddddddkj","ffff", R.drawable.login));
+        arrayList.add(new Player("fffffffffffffffffffff", "ff", R.drawable.login));
+        arrayList.add(new Player("gggddddddddddddd", "fffff", R.drawable.login));
+        arrayList.add(new Player("ttffffffffffffft", "bbb", R.drawable.login));
 
 
-       /* final MyAdapter adapter = new MyAdapter(this, arrayList);
-        recyclerView.setAdapter(adapter);*/
-
+        recyclerView.addItemDecoration(new ItemDecorate(1, dpToPx(2), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
        final RecycleAdapter adapter = new RecycleAdapter(this,arrayList,recyclerView,this);
        recyclerView.setAdapter(adapter);
+
+
+
         //SEARCH
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -57,10 +61,11 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         });
 
     }
-
-    public void nextActivity(View view) {
-        startActivity(new Intent(this,listacc.class));
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
 
     @Override
     public void onItemClick(View v, int pos) {
@@ -76,47 +81,6 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     }
 
 
-    //ADD PLAYERS TO ARRAYLIST
-  /*  private ArrayList<Player> getPlayers()
-    {
-        ArrayList<Player> players=new ArrayList<>();
-        Player p=new Player();
-        p.setName("Ander Herera");
-        p.setPos("Midfielder");
-        p.setImg(R.drawable.login);
-        players.add(p);
 
-        p=new Player();
-        p.setName("David De Geaa");
-        p.setPos("Goalkeeper");
-        p.setImg(R.drawable.login);
-        players.add(p);
-
-        p=new Player();
-        p.setName("Michael Carrick");
-        p.setPos("Midfielder");
-        p.setImg(R.drawable.login);
-        players.add(p);
-
-        p=new Player();
-        p.setName("Juan Mata");
-        p.setPos("Playmaker");
-        p.setImg(R.drawable.login);
-        players.add(p);
-
-        p=new Player();
-        p.setName("Diego Costa");
-        p.setPos("Striker");
-        p.setImg(R.drawable.login);
-        players.add(p);
-
-        p=new Player();
-        p.setName("Oscar");
-        p.setPos("Playmaker");
-        p.setImg(R.drawable.login);
-        players.add(p);
-
-        return players;
-    }*/
 
 }

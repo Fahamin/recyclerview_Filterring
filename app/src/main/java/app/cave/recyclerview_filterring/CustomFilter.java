@@ -6,16 +6,11 @@ import java.util.ArrayList;
 
 public class CustomFilter extends Filter {
 
-    MyAdapter adapter;
     ArrayList<Player> filterList;
 
     RecycleAdapter recycleAdapter;
 
-    public CustomFilter(ArrayList<Player> filterList, MyAdapter adapter) {
-        this.adapter = adapter;
-        this.filterList = filterList;
 
-    }
 
     public CustomFilter(ArrayList<Player> filterList, RecycleAdapter recycleAdapter) {
 
